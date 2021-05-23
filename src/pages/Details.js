@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from "react";
 
 const Details = (props) => {
   const [post, setPost] = useState();
+  const { id } = useParams();
+
   useEffect(() => {
-    fetch(`https://jsonplaceholder.typicode.com/posts/${props.match.params.id}`)
+    fetch(`https://jsonplaceholder.typicode.com/posts/${id}`)
       .then((response) => response.json())
       .then((data) => setPost(data));
-  }, [props.match.params.id]);
+  }, [id]);
   return (
     <div>
-      <h2>Details {props.match.params.id}</h2>
+      <h2>Details {id}</h2>
       <p>{post?.id}</p>
       <p>{post?.title}</p>
       <p>{post?.body}</p>
